@@ -65,3 +65,4 @@ automated-resume-builder/
 ## Git Automation Note
 The backend uses `simple-git` to commit changes to a `resume-data.json` file in the project root whenever the resume is saved. In a production environment, this could push to a remote repository to trigger a static site rebuild (e.g., Gatsby or Next.js static export).
 Commit 3: Project description updated
+Commit 4: Frontend module info added
