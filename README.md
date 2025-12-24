@@ -67,3 +67,4 @@ The backend uses `simple-git` to commit changes to a `resume-data.json` file in 
 Commit 3: Project description updated
 Commit 4: Frontend module info added
 Commit 5: Backend module info added
+Commit 6: Docker setup explanation added
