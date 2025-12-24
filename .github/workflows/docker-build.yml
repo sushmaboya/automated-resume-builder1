@@ -1,0 +1,31 @@
+name: Docker Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mongo:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build Backend Docker Image
+      run: docker build -t resume-backend ./backend
+
+    - name: Build Frontend Docker Image
+      run: docker build -t resume-frontend ./frontend
+
+    - name: Run Containers (Sanity Check)
+      run: |
+        docker-compose up -d
+        docker ps
