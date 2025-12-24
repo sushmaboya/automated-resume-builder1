@@ -14,6 +14,8 @@ A full-stack DevOps project that allows users to build and update their resume d
 - **Backend**: Node.js, Express, Mongoose, Simple-Git
 - **Database**: MongoDB
 - **DevOps**: Docker, Docker Compose, GitHub Actions
+-  Frontend initialized using Vite + React
+
 
 ## Prerequisites
 - Docker & Docker Compose
