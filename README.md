@@ -70,3 +70,4 @@ Commit 5: Backend module info added
 Commit 6: Docker setup explanation added
 Commit 7: Git commands documented
 Commit 8: Branch strategy explained
+Commit 9: Merge process documented
