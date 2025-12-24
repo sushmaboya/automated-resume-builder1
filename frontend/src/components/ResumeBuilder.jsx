@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ResumeForm from './ResumeForm';
 import LivePreview from './LivePreview';
+import TemplateSelector from './TemplateSelector';
+import ATSScore from './ATSScore';
 import axios from 'axios';
 import html2pdf from 'html2pdf.js';
-import { Download, Save, Edit } from 'lucide-react';
+import { Download, Save, Edit, Eye } from 'lucide-react';
 
 function ResumeBuilder() {
     const [resumeData, setResumeData] = useState({
@@ -22,7 +24,8 @@ function ResumeBuilder() {
         achievements: []
     });
     const [loading, setLoading] = useState(false);
-    const [isEditing, setIsEditing] = useState(true); // Toggle for mobile or clarity
+    const [isEditing, setIsEditing] = useState(true);
+    const [selectedTemplate, setSelectedTemplate] = useState('standard');
 
     // Fetch initial data
     useEffect(() => {
@@ -40,7 +43,7 @@ function ResumeBuilder() {
         }
     };
 
-    const handleUpdate = async (updatedData) => {
+    const handleUpdate = (updatedData) => {
         setResumeData(updatedData);
     };
 
@@ -64,14 +67,14 @@ function ResumeBuilder() {
             return;
         }
 
-        // Clone the element to avoid interfering with the live view and remove scaling/transforms
+        // Clone the element to avoid interfering with the live view
         const clone = element.cloneNode(true);
 
-        // Reset styles on the clone to ensure A4 compatibility
+        // Reset styles for PDF generation
         clone.style.transform = 'none';
         clone.style.margin = '0';
         clone.style.width = '210mm'; // Force A4 width
-        clone.style.height = 'auto';
+        clone.style.minHeight = '297mm';
         clone.style.position = 'absolute';
         clone.style.left = '-9999px'; // Move off-screen
         clone.style.top = '0';
@@ -80,7 +83,7 @@ function ResumeBuilder() {
 
         const opt = {
             margin: 0,
-            filename: `${resumeData.fullName.replace(/\s+/g, '_') || 'resume'}.pdf`,
+            filename: `${resumeData.fullName.replace(/\s+/g, '_') || 'resume'}_${selectedTemplate}.pdf`,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2, useCORS: true, logging: true },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -99,49 +102,71 @@ function ResumeBuilder() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 p-4 font-sans text-gray-800">
-            {/* Top Bar */}
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center mb-6 bg-white p-4 rounded-lg shadow-sm">
-                <h1 className="text-2xl font-bold text-blue-900 flex items-center gap-2">
-                    📄 Automated Resume Builder
-                </h1>
-                <div className="flex gap-3 mt-4 md:mt-0">
-                    <button
-                        onClick={() => setIsEditing(!isEditing)}
-                        className="flex items-center gap-2 px-4 py-2 border rounded hover:bg-gray-50 text-gray-700"
-                    >
-                        <Edit size={18} /> {isEditing ? 'Hide Editor' : 'Edit Resume'}
-                    </button>
-                    <button
-                        onClick={handleSave}
-                        disabled={loading}
-                        className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow transition"
-                    >
-                        <Save size={18} /> {loading ? 'Saving...' : 'Save Data'}
-                    </button>
-                    <button
-                        onClick={handleDownload}
-                        className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow transition"
-                    >
-                        <Download size={18} /> Download PDF
-                    </button>
+        <div className="min-h-screen bg-gray-50 flex flex-col font-sans text-gray-800 overflow-hidden">
+            {/* Top Navigation Bar */}
+            <div className="bg-white border-b shadow-sm z-10 sticky top-0 px-6 py-3 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div className="flex items-center gap-3">
+                    <div className="bg-blue-600 w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+                        RB
+                    </div>
+                    <h1 className="text-xl font-bold text-gray-800 tracking-tight">
+                        Resume Builder
+                    </h1>
+                </div>
+
+                <div className="flex items-center gap-4">
+                    <TemplateSelector current={selectedTemplate} onSelect={setSelectedTemplate} />
+
+                    <div className="h-6 w-px bg-gray-300 mx-2 hidden md:block"></div>
+
+                    <div className="flex gap-2">
+                        <button
+                            onClick={() => setIsEditing(!isEditing)}
+                            className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium transition flex items-center gap-2"
+                        >
+                            {isEditing ? <Eye size={16} /> : <Edit size={16} />}
+                            {isEditing ? 'Preview Mode' : 'Editor Mode'}
+                        </button>
+                        <button
+                            onClick={handleSave}
+                            disabled={loading}
+                            className="bg-gray-800 hover:bg-gray-900 text-white px-3 py-1.5 rounded-md text-sm font-medium transition flex items-center gap-2"
+                        >
+                            <Save size={16} /> {loading ? 'Saving...' : 'Save'}
+                        </button>
+                        <button
+                            onClick={handleDownload}
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-md text-sm font-medium transition flex items-center gap-2 shadow-sm"
+                        >
+                            <Download size={16} /> PDF
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
+            {/* Main Workspace */}
+            <div className="flex flex-1 overflow-hidden">
 
                 {/* Editor Section */}
                 {isEditing && (
-                    <div className="w-full lg:w-5/12 bg-white rounded-lg shadow-sm p-6 overflow-y-auto h-[calc(100vh-140px)] scrollbar-thin">
-                        <h2 className="text-xl font-semibold mb-4 text-gray-700 border-b pb-2">Editor</h2>
-                        <ResumeForm data={resumeData} onUpdate={handleUpdate} />
+                    <div className="w-full lg:w-5/12 xl:w-4/12 flex flex-col border-r bg-white h-full relative z-0">
+                        {/* ATS Score Sticky Header */}
+                        <div className="p-4 border-b bg-gray-50/50 backdrop-blur-sm sticky top-0 z-10">
+                            <ATSScore data={resumeData} />
+                        </div>
+
+                        <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
+                            <ResumeForm data={resumeData} onUpdate={handleUpdate} />
+                        </div>
                     </div>
                 )}
 
                 {/* Preview Section */}
-                <div className={`w-full ${isEditing ? 'lg:w-7/12' : 'lg:w-full'} flex justify-center bg-gray-200/50 rounded-lg p-4 overflow-y-auto h-[calc(100vh-140px)]`}>
-                    <div className="scale-90 origin-top">
-                        <LivePreview data={resumeData} />
+                <div className={`w-full ${isEditing ? 'lg:w-7/12 xl:w-8/12' : 'lg:w-full'} bg-gray-200/50 relative overflow-hidden flex flex-col`}>
+                    <div className="flex-1 overflow-y-auto p-8 flex justify-center items-start">
+                        <div className="transform origin-top scale-90 lg:scale-100 transition-transform duration-300">
+                            <LivePreview data={resumeData} template={selectedTemplate} />
+                        </div>
                     </div>
                 </div>
             </div>
