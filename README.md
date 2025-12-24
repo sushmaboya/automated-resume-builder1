@@ -72,6 +72,4 @@ Commit 7: Git commands documented
 Commit 8: Branch strategy explained
 Commit 9: Merge process documented
 Commit 10: Project conclusion added
-Feature branch update
-
-This line is from master branch
+This line is resolved from master and experiment branches
