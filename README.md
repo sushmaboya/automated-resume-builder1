@@ -73,3 +73,19 @@ Commit 8: Branch strategy explained
 Commit 9: Merge process documented
 Commit 10: Project conclusion added
 This line is resolved from master and experiment branches
+
+## Screenshots
+## Screenshots
+
+### Git Commit History
+![Git Log](screenshots/git-log.png)
+
+### Local Branches
+![Git Branches](screenshots/git-branch.png)
+
+### GitHub Branches
+![GitHub Branches](screenshots/github-branches.png)
+
+### GitHub Commits
+![GitHub Commits](screenshots/github-commits.png)
+
