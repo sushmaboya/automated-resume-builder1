@@ -14,8 +14,7 @@ A full-stack DevOps project that allows users to build and update their resume d
 - **Backend**: Node.js, Express, Mongoose, Simple-Git
 - **Database**: MongoDB
 - **DevOps**: Docker, Docker Compose, GitHub Actions
--  "Updated frontend structure"
--   "Updated backend files
+
 
 
 ## Prerequisites
@@ -73,8 +72,10 @@ Commit 8: Branch strategy explained
 Commit 9: Merge process documented
 Commit 10: Project conclusion added
 This line is resolved from master and experiment branches
+-  "Updated frontend structure"
+-   "Updated backend files
 
-## Screenshots
+
 ## Screenshots
 
 ### Git Commit History
