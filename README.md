@@ -71,22 +71,24 @@ Commit 7: Git commands documented
 Commit 8: Branch strategy explained
 Commit 9: Merge process documented
 Commit 10: Project conclusion added
+## Merge Conflict
+This conflict was intentionally created between master and experiment branches and resolved successfully.
 This line is resolved from master and experiment branches
--  "Updated frontend structure"
--   "Updated backend files
+-  Updated frontend structure
+-  Updated backend files
 
-
-## Screenshots
+  ## Screenshots
 
 ### Git Commit History
-![Git Log](screenshots/git-log.png)
+![Git Log](https://raw.githubusercontent.com/sushmaboya/automated-resume-builder1/master/screenshots/git-log.png)
 
 ### Local Branches
-![Git Branches](screenshots/git-branch.png)
+![Git Branches](https://raw.githubusercontent.com/sushmaboya/automated-resume-builder1/master/screenshots/git-branch.png)
 
 ### GitHub Branches
-![GitHub Branches](screenshots/github-branches.png)
+![GitHub Branches](https://raw.githubusercontent.com/sushmaboya/automated-resume-builder1/master/screenshots/github-branches.png)
 
 ### GitHub Commits
-![GitHub Commits](screenshots/github-commits.png)
+![GitHub Commits](https://raw.githubusercontent.com/sushmaboya/automated-resume-builder1/master/screenshots/github-commits.png)
+
 
