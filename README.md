@@ -14,8 +14,7 @@ A full-stack DevOps project that allows users to build and update their resume d
 - **Backend**: Node.js, Express, Mongoose, Simple-Git
 - **Database**: MongoDB
 - **DevOps**: Docker, Docker Compose, GitHub Actions
--  "Updated frontend structure"
--   "Updated backend files
+
 
 
 ## Prerequisites
@@ -72,4 +71,24 @@ Commit 7: Git commands documented
 Commit 8: Branch strategy explained
 Commit 9: Merge process documented
 Commit 10: Project conclusion added
+## Merge Conflict
+This conflict was intentionally created between master and experiment branches and resolved successfully.
 This line is resolved from master and experiment branches
+-  Updated frontend structure
+-  Updated backend files
+
+  ## Screenshots
+
+### Git Commit History
+![Git Log](https://raw.githubusercontent.com/sushmaboya/automated-resume-builder1/master/screenshots/git-log.png)
+
+### Local Branches
+![Git Branches](https://raw.githubusercontent.com/sushmaboya/automated-resume-builder1/master/screenshots/git-branch.png)
+
+### GitHub Branches
+![GitHub Branches](https://raw.githubusercontent.com/sushmaboya/automated-resume-builder1/master/screenshots/github-branches.png)
+
+### GitHub Commits
+![GitHub Commits](https://raw.githubusercontent.com/sushmaboya/automated-resume-builder1/master/screenshots/github-commits.png)
+
+
